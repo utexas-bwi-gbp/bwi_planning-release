@@ -1,0 +1,9 @@
+ros-hydro-bwi-planning-icaps14 (0.2.0-0raring) raring; urgency=high
+
+  * Initial release to Hydro.
+  * Spring Symposium code is now working.
+  * Updating bwi_planning code for the ICAPS 2014 paper.
+
+ -- Piyush Khandelwal <piyushk@gmail.com>  Wed, 23 Apr 2014 05:00:00 -0000
+
+
