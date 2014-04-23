@@ -1,0 +1,12 @@
+Source: ros-hydro-bwi-planning
+Section: misc
+Priority: extra
+Maintainer: Piyush Khandelwal <piyushk@gmail.com>
+Build-Depends: debhelper (>= 7.0.50~), ros-hydro-bwi-planning-common, ros-hydro-catkin, ros-hydro-message-generation, ros-hydro-roscpp, ros-hydro-roslaunch, ros-hydro-std-msgs, ros-hydro-std-srvs
+Homepage: http://wiki.ros.org/bwi_planning
+Standards-Version: 3.9.2
+
+Package: ros-hydro-bwi-planning
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, gringo, ros-hydro-bwi-planning-common, ros-hydro-clasp, ros-hydro-message-runtime, ros-hydro-roscpp, ros-hydro-segbot-gazebo, ros-hydro-segbot-gui, ros-hydro-segbot-logical-translator, ros-hydro-segbot-navigation, ros-hydro-segbot-simulation-apps, ros-hydro-sound-play, ros-hydro-std-msgs, ros-hydro-std-srvs, ros-hydro-utexas-gdc
+Description: The planner_krr14 package
