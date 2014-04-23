@@ -1,0 +1,14 @@
+<launch>
+
+  <!-- launch the planner -->
+  <include file="$(find bwi_planning)/launch/planner_krr2014.launch">
+    <arg name="dry_run" value="true" />
+    <arg name="initial_file" value="$(find bwi_planning)/examples/initial" />
+    <arg name="query_file" value="$(find bwi_planning)/examples/query" />
+    <arg name="rigid_knowledge_file" value="$(find bwi_planning)/domain/example" />
+  </include>
+
+  <!-- launch the gui -->
+  <node name="segbot_gui" pkg="segbot_gui" type="question_dialog_plugin" />
+
+</launch>
