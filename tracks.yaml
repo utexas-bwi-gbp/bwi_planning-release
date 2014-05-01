@@ -13,7 +13,6 @@ tracks:
     name: bwi_planning
     patches: null
     release_inc: '0'
-    release_repo_url: git@github.com:utexas-bwi-gbp/bwi_planning-release.git
     release_tag: :{version}
     ros_distro: hydro
     vcs_type: git
