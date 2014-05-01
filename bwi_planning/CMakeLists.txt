@@ -9,6 +9,12 @@ find_package(catkin REQUIRED COMPONENTS
   std_srvs
 )
 find_package(Boost REQUIRED)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(YAML_CPP REQUIRED yaml-cpp)
+
+if(NOT ${YAML_CPP_VERSION} VERSION_LESS "0.5")
+add_definitions(-DHAVE_NEW_YAMLCPP)
+endif()
 
 catkin_python_setup()
 
@@ -37,31 +43,29 @@ catkin_package(
 )
 
 
-include_directories(include ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
+include_directories(include ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${YAML_CPP_INCLUDE_DIRS})
 
 add_library(${PROJECT_NAME} src/libbwi_planning/cost_learner.cpp)
-target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${YAML_CPP_LIBRARIES})
 
-add_executable(cost_learner src/nodes/cost_learner.cpp)
-target_link_libraries(cost_learner ${PROJECT_NAME})
+add_executable(${PROJECT_NAME}/cost_learner src/nodes/cost_learner.cpp)
+add_dependencies(${PROJECT_NAME}/cost_learner ${PROJECT_NAME}_generate_messages_cpp)
+set_target_properties(${PROJECT_NAME}/cost_learner PROPERTIES OUTPUT_NAME "cost_learner")
+target_link_libraries(${PROJECT_NAME}/cost_learner ${PROJECT_NAME})
 
 # Install the plugin and the plugin description
 install (DIRECTORY include/${PROJECT_NAME}/
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
 
 # Install the libary
-install(TARGETS ${PROJECT_NAME}
+install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}/cost_learner
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
-# Install the node
-install(TARGETS cost_learner
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
-
 # unit tests are enabled for roslaunch files
-if (CATKIN_ENABLE_TESTING)
+if(CATKIN_ENABLE_TESTING)
   find_package(roslaunch REQUIRED)
   roslaunch_add_file_check(launch)
 endif()
