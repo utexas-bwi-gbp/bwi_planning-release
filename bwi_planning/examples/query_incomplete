@@ -1,2 +1,0 @@
-faculty(dan).
-:- not visiting(dan, n).

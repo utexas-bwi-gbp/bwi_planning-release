@@ -1,3 +1,0 @@
-#!/bin/bash
-
-rm -f /tmp/initial /tmp/result /tmp/values* /tmp/distances.lua /tmp/planning_times.txt
